@@ -1,55 +1,53 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { logIn, getUserFromSession } from '../../utilities/user-functions.js'
-import axios from 'axios'
-import { AppContext } from '../../contexts/app_context.js';
+import React, { Component } from 'react'
+import { signUp } from '../../utilities/user-functions.js'
 
-const Login = () => {
-
-    let { setUser } = useContext(AppContext);
-
-    const [formState, setFormState] = useState({email: '', password: ''});
-    const [error, setError] = useState("");
-    const [disabled, setDisabled] = useState(true);
-
-
-    useEffect(() => {
-        setDisabled(formState.email && formState.password ? false : true);
-    }, [formState])
-
-
-    const handleChange = (event) => {
+export default class SignUpForm extends Component {
+    state = {
+        name: '',
+        email: '',
+        password: '',
+        confirm: '',
+        error: '',
+      };
+      handleChange = (event) => {
         let propertyName = event.target.name;
-        setFormState({
-            ...formState,
+        this.setState({
             [propertyName]: event.target.value,
+            error: ''
         });
       };
+      handleSubmit = async (event) => {
+        event.preventDefault(); // do not refresh the page
+        console.log("submitting!");
+        // check if password has special character (error handling)
+        let data = {...this.state};
+        delete data.confirm;
+        delete data.error;
+ 
+        let response = await signUp(data);
+        console.log(response);
+      }
 
-    const handleSubmit = async (e) => {
-      // LOGIN
-        // make a call to the server with this info and authenticate!
-        e.preventDefault();
-        await logIn(formState);
-        // get session info (user)
-        let user = await getUserFromSession()
-        setUser(user)
-    }
 
-  return (
+  render() {
+    const disable = this.state.password !== this.state.confirm;
+    return (
     <div>
         <div className="form-container">
-        <form autoComplete="off" onSubmit={handleSubmit}>
+          <form autoComplete="off" onSubmit={this.handleSubmit}>
+            <label>Name</label>
+            <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required />
             <label>Email</label>
-            <input type="email" name="email" value={formState.email} onChange={handleChange} required />
+            <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required />
             <label>Password</label>
-            <input type="password" name="password" value={formState.password} onChange={handleChange} required />
-            <button type="submit" disabled={disabled}>Log In</button>
-        </form>
+            <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
+            <label>Confirm</label>
+            <input type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} required />
+            <button type="submit" disabled={disable}>SIGN UP</button>
+          </form>
         </div>
-        <p className="error-message">&nbsp;{error}</p>
-    </div>
-  )
-}
-
-export default Login;
-
+        <p className="error-message">&nbsp;{this.state.error}</p>
+      </div>
+    )
+  }
+};

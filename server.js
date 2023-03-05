@@ -1,16 +1,18 @@
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
+
 // cross origin access 
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 
 // MODEL/S
+const Todo = require('./models/todo');
 const User = require('./models/user');
 
 const passport = require('passport');
 const session = require('express-session');
-const initializePassport = require('./config/passport-config.js')
+const initializePassport = require('./config/passport-config')
 
 require('dotenv').config();
 require('./config/database');
@@ -62,6 +64,10 @@ app.get('/session-info', (req, res) => {
     });
 });
 
+app.get('/logout', (req, res) => {
+    console.log("logging out")
+    req.session.destroy();
+})
 
 app.post('/users/signup',async (req, res) => {
     console.log(req.body);
@@ -77,7 +83,6 @@ app.post('/users/signup',async (req, res) => {
     // sending user response after creation or login
     res.json("user created")
 });
-
 
 app.put('/users/login', async (req, res, next) => {
     console.log(req.body);
@@ -103,6 +108,31 @@ app.put('/users/login', async (req, res, next) => {
     })(req, res, next);
 })
 
+app.post('/todos/new', async (req, res) => {
+    console.log(req.session.passport.user._id)
+    let todo = await Todo.create({
+        user: req.session.passport.user._id,
+        text: req.body.text,
+    });
+    res.json(todo);
+});
+
+app.get('/todos', async (req, res) => {
+    let todos = await Todo.getTodos(req.session.passport.user._id);
+    res.json(todos);
+});
+
+app.put('/todos/update/:id', async (req, res) => {
+    let todo = await Todo.findByIdAndUpdate(req.params.id);
+    todo.completed = !todo.completed;
+    todo.save();
+    res.json(todo);
+});
+
+app.delete('/todos/delete/:id', async (req, res) => {
+    let todo = await Todo.findByIdAndDelete(req.params.id);
+    res.json(todo);
+});
 
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
