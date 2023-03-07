@@ -50,6 +50,7 @@ app.use(session({
     saveUninitialized: true,
     cookie: { originalMaxAge: 3600000 }
 }));
+app.use(passport.session())
 
 // server build folder
 app.use(express.static(path.join(__dirname, 'build')));
@@ -64,9 +65,14 @@ app.get('/session-info', (req, res) => {
     });
 });
 
-app.get('/logout', (req, res) => {
+app.post('/logout', (req, res) => {
     console.log("logging out")
-    req.session.destroy();
+    req.logOut(function (err) {
+        if (err) {
+            console.log(err);
+        }
+    });
+    res.json("logged out")
 })
 
 app.post('/users/signup',async (req, res) => {

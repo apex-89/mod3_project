@@ -14,7 +14,7 @@ const Auth = () => {
     <section className="auth-page">
       <div>
       <div className="login-container">
-        <div>login/signup</div> 
+        <div className='signIn-title'>Daily ToDo's</div> 
         <div className="login-button" onClick={handleButtonClick}>{isSignup ? "Login" : "Sign up"}</div>
       </div>
 

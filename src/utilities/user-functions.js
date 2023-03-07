@@ -10,6 +10,7 @@ export const signUp = async (formData) => {
 
     return serverResponse;
 }
+
 export const logIn = async (formData) => {
 
         let serverResponse = await axios({
@@ -20,6 +21,14 @@ export const logIn = async (formData) => {
         console.log(serverResponse);
   
     return serverResponse;
+}
+
+export const logOut = async () => {
+    let response = await axios({
+        method: "POST",
+        url: "/logout"
+    });
+    return response;
 }
 
 export const refreshPage = () =>  {

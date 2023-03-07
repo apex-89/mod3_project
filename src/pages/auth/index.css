@@ -6,3 +6,23 @@
     height: 100%;
     width: 100%;
 }
+
+.login-button {
+    display: inline-block;
+    padding: .5vmin;
+    padding-bottom: .75vmin;
+    margin: 1vmin;
+}
+
+.login-button:hover {
+    font-weight: bold;
+    text-decoration-line: underline;
+    border-radius: .5vmin;
+    background-color: var(--orange);
+    color: var(--white);
+}
+
+.signIn-title{
+    font-size: 4vmin;
+    color: var(--text-dark);
+}

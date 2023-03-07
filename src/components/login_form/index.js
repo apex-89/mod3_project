@@ -15,16 +15,6 @@ const Login = () => {
         setDisabled(formState.email && formState.password ? false : true);
     }, [formState])
 
-    // useEffect(() => {
-    //   let autoLogin = async () => {
-    //     await logIn({email: "bruce@bruce.com", password: "asdf"});
-    //     // get session info (user)
-    //     let user = await getUserFromSession()
-    //     setUser(user);
-    //   }
-    //   autoLogin()
-    // }, [])
-
     const handleChange = (event) => {
         let propertyName = event.target.name;
         setFormState({

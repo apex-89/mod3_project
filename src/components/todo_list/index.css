@@ -1,0 +1,31 @@
+.todo {
+    background-color: var(--tan-2);
+    padding: 16px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    font-size: 2vmin;
+    width: 100%;
+}
+
+.todo .text {
+    color: var(--text-dark);
+    font-weight: bold;
+}
+
+.checkbox:hover {
+    cursor: pointer;
+}
+
+.delete-todo:hover {
+    cursor: pointer;
+}
+
+#completed{
+    text-decoration: line-through;
+    color: var(--text-light);
+    font-weight:lighter;
+}
+  

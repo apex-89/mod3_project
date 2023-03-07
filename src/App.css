@@ -1,20 +1,46 @@
 .App {
-  text-align: center;
-  height: 100vh;
-  display: flex;
+    text-align: center;
+    height: 100vh;
+    display: flex;
+  }
+
+  .page-wrapper{
+    display: grid;
+    grid-template-columns: 1fr 2.5fr 1fr;
+    grid-template-rows: 1fr;
+    width: 100%;
+    margin: 20px;
+    background: white;
 }
 
-.todo{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
+  div.MainPage {
+    grid-column-start: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    width: 100%;
+    margin-bottom: 3vmin;
+    margin-top: 3vmin;
+    padding: 2vmin;
+    color: var(--text-light);
+    background-color: var(--white);
+    border: .1vmin solid var(--tan-3);
+    border-radius: 1vmin;
+    font-size: 2vmin;
+    overflow-y: scroll;
 }
 
-#completed{
-  text-decoration: line-through;
+.MainPage h1{
+    font-size: 4vmin;
+    color: var(--text-dark);
+    text-decoration: underline;
 }
 
-.add-todo{
-  font-size: 50px;
+.logout {
+    display: flex;
+    margin: 10vmin 0 0;
+    align-items: flex-end;
+    justify-content: center;
 }
+
+
+

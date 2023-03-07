@@ -1,10 +1,17 @@
 import React from 'react'
 import axios from 'axios';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../contexts/app_context';
+import './index.css';
 
 const AddForm = () => {
   let { todos, setTodos, newTodo, setNewTodo, user } = useContext(AppContext);
+  const [disabled, setDisabled] = useState(true);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    setDisabled(newTodo ? false : true);
+  }, [newTodo])
 
   const addTodo = async () => {
     console.log(newTodo);
@@ -18,14 +25,24 @@ const AddForm = () => {
     });
     console.log(response);
     setTodos([...todos, response.data]);
+    setNewTodo("");
   }
 
   return (
     <div>
-        <h3>Add Task</h3>
-        <input type="text" className="add-input" onChange={e => setNewTodo(e.target.value)} value={newTodo} />
-        <div className="button" onClick={addTodo}>Create Task</div>
+      <h4>{new Date().toLocaleDateString()}</h4>      
+      <div className='showAdd' onClick={() => setShow(!show)}>📋</div>
+      {show ? (
+        <div className="addForm">
+            <div>
+              <h3>What needs to get done!</h3>
+              <input type="text" className="add-input" onChange={e => setNewTodo(e.target.value)} value={newTodo} />
+              <button className="button" disabled={disabled} onClick={addTodo}>Add Task</button>
+            </div>
+        </div>
+      ) : ''}
     </div>
+
   )
 }
 

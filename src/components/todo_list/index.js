@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import { AppContext } from '../../contexts/app_context'
+import AddForm from '../add_form'
 import axios from 'axios'
+import './index.css'
 
 const ToDoList = () => {
     
@@ -49,7 +51,9 @@ const ToDoList = () => {
     
         
         return (
-            [todosJSX]
+            <div className='todo-container'>
+                {todosJSX} 
+            </div>
         )
 }
 

@@ -1,12 +1,14 @@
 import './App.css';
 import { useEffect, useState, useContext } from 'react';
 import AuthPage from './pages/auth';
+import UserLogOut from './components/user_logout';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { getUserFromSession } from './utilities/user-functions';
 import axios from 'axios';
 import { AppContext } from './contexts/app_context';
 import Main from './pages/main'
 import Loader from "react-js-loader";
+import AddForm from './components/add_form';
 
 
 function App() {
@@ -46,11 +48,15 @@ function App() {
       return (
         <>
           { user ? 
-            <div className="page-wrapper">
+            <div className='page-wrapper'>
+              <div className='logout'>
+                <UserLogOut />
+              </div>
               <Routes>
                 <Route path="/main" element={<Main />}/>
                 <Route path="/*" element={<Navigate to="/main" />} />
               </Routes>
+              <AddForm />
             </div>
               :
               <AuthPage />
@@ -65,7 +71,7 @@ function App() {
   }
 	return (
 		<div className="App">
-		     { returnPage() }
+		  { returnPage() }
     </div>
 	);
 }
