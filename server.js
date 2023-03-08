@@ -75,19 +75,24 @@ app.post('/logout', (req, res) => {
     res.json("logged out")
 })
 
-app.post('/users/signup',async (req, res) => {
-    console.log(req.body);
-    let hashedPassword = await bcrypt.hash(req.body.password, 10)
-    console.log(hashedPassword);
-    // use User model to place user in the database
-    let userFromCollection = await User.create({
-        email: req.body.email,
-        name: req.body.name,
-        password: hashedPassword
-    })
-    console.log(userFromCollection);
-    // sending user response after creation or login
-    res.json("user created")
+app.post('/users/signup', async (req, res) => {
+    try {
+        console.log(req.body);
+        let hashedPassword = await bcrypt.hash(req.body.password, 10)
+        console.log(hashedPassword);
+        // use User model to place user in the database
+        let userFromCollection = await User.create({
+            email: req.body.email,
+            name: req.body.name,
+            password: hashedPassword
+        })
+        console.log(userFromCollection);
+        // sending user response after creation or login
+        res.json("user created");
+    } catch (err) {
+        console.error(err);
+        res.status(500).json("Internal Server Error");
+    }
 });
 
 app.put('/users/login', async (req, res, next) => {

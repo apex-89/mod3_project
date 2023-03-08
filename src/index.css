@@ -8,6 +8,12 @@
   --orange: #F67F00;
   --text-light: #968c84;
   --text-dark: #615954;
+  --red: #ff7a85;
+  --white-1: #F9FCF9;
+  --white-2: #EDF2ED;
+  --white-3: #DCE9DC;
+  --white-4: #C9E0C9;
+  --light-blue: #A8DADC;
 }
 
 *, *:before, *:after {
@@ -21,7 +27,7 @@ body {
   sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--tan-4);
+  background-color: var(--light-blue);
   height: 100vh;
 }
 
@@ -36,7 +42,7 @@ code {
 
 .login-container {
   padding: 3vmin;
-  background-color: var(--tan-1);
+  background-color: var(--white-1);
   border: .1vmin solid var(--tan-3);
   border-radius: 1vmin;
   color: var(--text-light);
@@ -44,13 +50,13 @@ code {
 
 .form-container {
   padding: 3vmin;
-  background-color: var(--tan-1);
+  background-color: var(--white-1);
   border: .1vmin solid var(--tan-3);
   border-radius: 1vmin;
 }
 
 p.error-message {
-  color: var(--orange);
+  color: var(--text-dark);
   text-align: center;
 }
 
@@ -78,14 +84,14 @@ input {
 }
 
 input:focus {
-  border-color: var(--orange);
+  border-color: var(--red);
 }
 
 button, a.button {
   margin: 1vmin;
   padding: 1vmin;
   color: var(--white);
-  background-color: var(--orange);
+  background-color: var(--red);
   font-size: 2vmin;
   font-weight: bold;
   text-decoration: none;
@@ -103,7 +109,7 @@ button, a.button {
 
 button:disabled, form:invalid button[type="submit"] {
   cursor: not-allowed;
-  background-color: var(--tan-4);
+  background-color: var(--tan-3);
 }
 
 button[type="submit"] {

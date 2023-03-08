@@ -26,6 +26,7 @@ const AddForm = () => {
     console.log(response);
     setTodos([...todos, response.data]);
     setNewTodo("");
+    setShow(!show)
   }
 
   return (

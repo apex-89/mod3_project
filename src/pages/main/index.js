@@ -7,7 +7,7 @@ const Main = () => {
 
   return (
     <div className='MainPage'>
-      <h1>Welcome, {user.name}</h1>
+      <h1>Welcome {user.name}</h1>
       <ToDoList />
     </div>
   )

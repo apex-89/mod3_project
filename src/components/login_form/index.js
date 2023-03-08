@@ -31,6 +31,9 @@ const Login = () => {
         // get session info (user)
         let user = await getUserFromSession()
         setUser(user);
+        if(!user) {
+          setError("Email or Password incorrect");
+        }
     }
 
   return (

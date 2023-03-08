@@ -26,6 +26,13 @@ export default class SignUpForm extends Component {
  
         let response = await signUp(data);
         console.log(response);
+        this.setState({
+          name: '',
+          email: '',
+          password: '',
+          confirm: '',
+          error: '',
+        });
       }
 
 

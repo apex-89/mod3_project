@@ -18,7 +18,7 @@
     font-weight: bold;
     text-decoration-line: underline;
     border-radius: .5vmin;
-    background-color: var(--orange);
+    background-color: var(--red);
     color: var(--white);
 }
 
