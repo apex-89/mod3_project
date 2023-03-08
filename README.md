@@ -12,7 +12,7 @@
 * Github: [@apex-89](https://github.com/apex-89)
 * LinkedIn: [@appesh89](https://linkedin.com/in/appesh89)
 
-## Project Details
+# Project Details
 
 ### Tech Stack
 
